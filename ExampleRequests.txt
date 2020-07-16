@@ -1,0 +1,26 @@
+POST: https://localhost:62518/character/Briv/hp/Damage
+Body: {
+	"damage": [{
+		"amount": 5,
+		"type": "slashing"
+	}, {
+		"amount": 10,
+		"type": "fire"
+	}, {
+		"amount": 3,
+		"type": "poison"
+	}]
+}
+
+
+
+POST: https://localhost:62518/character/Briv/hp/AddTemp
+Body: {
+	"amount": 4
+}
+
+
+POST: https://localhost:62518/character/Briv/hp/heal
+Body: {
+	"amount": 5
+}

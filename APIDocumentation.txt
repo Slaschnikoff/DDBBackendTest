@@ -1,0 +1,87 @@
+Asumptions made: I believe that this request was to work on a single character, I assume this is for simplicities sake so I kept with it to not add any scope creep. I did however have each resource include the character name it's operating on, which could be a simple key, so I could extend to using multiple characters later.
+
+Resources needed: Character
+
+Data types in bold are re-used, defined at bottom of documentation
+
+Terms: 
+	• Infrastructure refers to the data storage mechanism. In my example I'm just going to have a staticly typed variable that contains the character value so it's easier to test the code on any machine. This will be written so that it wouldn't be terrible difficult to swap out the dependency.
+	• Domain referr to the business logic layer. This is not a term used in this documentation but is in the created project.
+
+GET /Character/:name/HP
+	Description: Gets the current HP of a character
+	Response:
+		Status 200 
+			Body: CharacterHealth
+		Status 500
+			Unknown exception
+		Status 404
+			Character not found
+		Status 400
+			Invalid arguments passed to the API
+		
+		
+POST /Character/:name/HP/Heal
+	Description: Increases the health of the character by the requested amount
+	Request Body: {
+		"amount": number
+	}
+	Response: 
+		Status 200 
+			Body: CharacterHealth
+		Status 500
+			Unknown exception
+		Status 404
+			Character not found
+		Status 400
+			Invalid arguments passed to the API
+		
+		
+POST /Character/:name/HP/Damage
+	Description:  Damage the character. This takes an array and can apply multiple damage types at once
+	Request Body: {
+		"damage": [{
+			"amount": number,
+			"type": string
+		}] 
+	}
+	Response:
+		Status 200
+			Body: CharacterHealth
+		Status 500
+			Unknown exception
+		Status 404
+			Character not found
+		Status 400
+			Invalid arguments passed to the API
+	
+POST /Character/:name/HP/AddTemp
+	Description: Increases the health of the character by the requested amount
+	Request Body: {
+		"amount": number
+	}
+	Response: 
+		Status 200 
+			Body: CharacterHealth
+		Status 500
+			Unknown exception
+		Status 404
+			Character not found
+		Status 400
+			Invalid arguments passed to the API
+		
+
+--
+Notes:
+	1. Heal / AddTemp routes could technically have the number in the route params, but because Damage can not since it's more complicated, I liked the consistency of keeping them all in the body.
+
+--
+Objects
+
+CharacterHealth
+{ 
+	"total": number, //including temp
+	"max: "number,
+	"temp" number,
+	"current: number
+}
